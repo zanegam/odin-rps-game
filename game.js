@@ -1,16 +1,32 @@
-function playRound(){
+function game() {
+    let playerScore = 0;
+
+    for(let i = 0; i < 5; i++) {
+        playerScore += playRound();
+    }
+    
+    let computerScore = 5 - playerScore;
+    
+    if(playerScore > computerScore) {
+        alert(`Congratulations! You beat the computer ${playerScore}-${computerScore}!`);
+    }
+    else {
+        alert(`Sorry! The computer beat you ${computerScore}-${playerScore}. Try Again!`);
+    }
+}
+
+function playRound() {
     let winner = null
 
-    while(winner===null){
+    while(winner===null) {
         playerSelection = playerInput();
-        console.log(playerSelection);
 
         computerSelection = computerPlay();
-        console.log(computerSelection);
 
         winner = findWinner(playerSelection, computerSelection);
         roundOutput(winner, playerSelection, computerSelection);
     }
+    return winner;
 }
 
 function computerPlay() {
