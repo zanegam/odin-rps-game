@@ -1,0 +1,16 @@
+html, body{
+    height: 100%;
+    margin: 0;
+}
+
+#button-div {
+    display:flex;
+    align-content: center;
+    justify-content: center;
+    height: 100%;
+}
+
+#start-btn {
+    height: 50px;
+    margin: auto;
+}

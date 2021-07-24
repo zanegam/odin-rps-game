@@ -1,5 +1,3 @@
-playRound();
-
 function playRound(){
     let winner = null
 
