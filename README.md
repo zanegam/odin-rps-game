@@ -1,0 +1,1 @@
+Building a rock paper scissors game as a project for the Odin Project. 
