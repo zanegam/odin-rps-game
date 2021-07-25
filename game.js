@@ -1,11 +1,11 @@
 function playGame() {
     let playerScore = 0;
+    let computerScore = 0;
 
-    for(let i = 0; i < 5; i++) {
-        playerScore += playRound();
+    while(playerScore < 5 && computerScore < 5){
+        playRound() === 1? playerScore += 1: computerScore += 1;
+        showScoreDiv(playerScore, computerScore);
     }
-    
-    let computerScore = 5 - playerScore;
     
     if(playerScore > computerScore) {
         alert(`Congratulations! You beat the computer ${playerScore}-${computerScore}!`);
@@ -24,7 +24,7 @@ function playRound() {
         computerSelection = computerPlay();
 
         winner = getWinner(playerSelection, computerSelection);
-        dispalyRoundOutput(winner, playerSelection, computerSelection);
+        displayRoundOutput(winner, playerSelection, computerSelection);
     }
     return winner;
 }
@@ -89,5 +89,28 @@ function displayRoundOutput(winner, player, computer){
             break;
         default:
             alert(`Tie game! You both chose ${player}. Try again!`)
+    }
+}
+
+function showScoreDiv(player, computer){
+    let message = `Current score\nPlayer: ${player} Computer: ${computer}`
+    if(!document.querySelector('#score-div')){
+    const body = document.querySelector('body');
+
+    const div = document.createElement('div');
+    div.id = 'score-div'
+
+    const para = document.createElement('p');
+    para.id = 'score';
+    para.whiteSpace = 'pre-line';
+    para.textContent = message;
+    console.log(para);
+
+    div.appendChild(para);
+    body.appendChild(div);
+    }
+    else{
+        const para = document.querySelector('#score');
+        para.textContent = message;
     }
 }
