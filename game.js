@@ -1,4 +1,4 @@
-function game() {
+function playGame() {
     let playerScore = 0;
 
     for(let i = 0; i < 5; i++) {
@@ -19,12 +19,12 @@ function playRound() {
     let winner = null
 
     while(winner===null) {
-        playerSelection = playerInput();
+        playerSelection = getPlayerInput();
 
         computerSelection = computerPlay();
 
-        winner = findWinner(playerSelection, computerSelection);
-        roundOutput(winner, playerSelection, computerSelection);
+        winner = getWinner(playerSelection, computerSelection);
+        dispalyRoundOutput(winner, playerSelection, computerSelection);
     }
     return winner;
 }
@@ -47,7 +47,7 @@ function getRandomInt(min, max) {
     return Math.floor(Math.random() * (max - min + 1) + min)
 }
 
-function playerInput() {
+function getPlayerInput() {
     let valid = false;
     while(valid === false) {
         let selection = prompt("Please select Rock, Paper, or Scissors:")
@@ -67,7 +67,7 @@ function playerInput() {
     }
 }
 
-function findWinner(player, computer){
+function getWinner(player, computer){
     if(player === computer) {return null}
     switch(player){
         case "Rock":
@@ -79,7 +79,7 @@ function findWinner(player, computer){
     }
 }
 
-function roundOutput(winner, player, computer){
+function displayRoundOutput(winner, player, computer){
     switch(winner){
         case 1:
             alert(`Congratulations, you win! ${player} beats ${computer}.`);
