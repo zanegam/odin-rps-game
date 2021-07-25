@@ -1,3 +1,8 @@
+const startBtn = document.querySelector('#start-btn')
+startBtn.addEventListener('click', () => {
+    showGameButtons();
+})
+
 function playGame() {
     let playerScore = 0;
     let computerScore = 0;
@@ -8,10 +13,10 @@ function playGame() {
     }
     
     if(playerScore > computerScore) {
-        alert(`Congratulations! You beat the computer ${playerScore}-${computerScore}!`);
+        //alert(`Congratulations! You beat the computer ${playerScore}-${computerScore}!`);
     }
     else {
-        alert(`Sorry! The computer beat you ${computerScore}-${playerScore}. Try Again!`);
+        //alert(`Sorry! The computer beat you ${computerScore}-${playerScore}. Try Again!`);
     }
 }
 
@@ -19,12 +24,12 @@ function playRound() {
     let winner = null
 
     while(winner===null) {
-        playerSelection = getPlayerInput();
+        playerSelection = "Rock"//getPlayerInput();
 
         computerSelection = computerPlay();
 
         winner = getWinner(playerSelection, computerSelection);
-        displayRoundOutput(winner, playerSelection, computerSelection);
+        //displayRoundOutput(winner, playerSelection, computerSelection);
     }
     return winner;
 }
@@ -113,4 +118,23 @@ function showScoreDiv(player, computer){
         const para = document.querySelector('#score');
         para.textContent = message;
     }
+}
+
+function showGameButtons(){
+    const start = document.querySelector('#start-btn');
+    start.remove();
+
+    const btnDiv = document.querySelector('#button-div');
+
+    const rock = document.createElement('button');
+    rock.textContent = 'Rock';
+    btnDiv.append(rock);
+
+    const paper = document.createElement('button');
+    paper.textContent = 'Paper';
+    btnDiv.append(paper);
+
+    const scissors = document.createElement('button');
+    scissors.textContent = 'Scissors';
+    btnDiv.append(scissors);
 }
