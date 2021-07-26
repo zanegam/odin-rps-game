@@ -1,30 +1,61 @@
 const startBtn = document.querySelector('#start-btn')
-startBtn.addEventListener('click', () => {
+startBtn.addEventListener('click', () =>{
     showGameButtons();
 })
 
-function playGame() {
+function showGameButtons(){
+    const start = document.querySelector('#start-btn');
+    start.remove();
+
+    const btnDiv = document.querySelector('#button-div');
+
+    const rock = document.createElement('button');
+    rock.textContent = 'Rock';
+    rock.id = 'rock';
+    rock.classList.add('game-btn');
+    btnDiv.append(rock);
+
+    const paper = document.createElement('button');
+    paper.textContent = 'Paper';
+    paper.id = 'paper';
+    paper.classList.add('game-btn');
+    btnDiv.append(paper);
+
+    const scissors = document.createElement('button');
+    scissors.textContent = 'Scissors';
+    scissors.id = 'scissors';
+    scissors.classList.add('game-btn');
+    btnDiv.append(scissors);
+
+    const gameBtns = document.querySelectorAll('button');
+    gameBtns.forEach((btn) => {
+    btn.addEventListener('click', playGame);
+    });
+}
+
+function playGame(e) {
+    const btnEvt = e;
     let playerScore = 0;
     let computerScore = 0;
 
-    while(playerScore < 5 && computerScore < 5){
-        playRound() === 1? playerScore += 1: computerScore += 1;
+    if(playerScore < 5 && computerScore < 5){
+        playRound(btnEvt.srcElement.id) === 1? playerScore += 1: computerScore += 1;
         showScoreDiv(playerScore, computerScore);
     }
-    
-    if(playerScore > computerScore) {
-        //alert(`Congratulations! You beat the computer ${playerScore}-${computerScore}!`);
-    }
     else {
-        //alert(`Sorry! The computer beat you ${computerScore}-${playerScore}. Try Again!`);
+        if(playerScore > computerScore) {
+            //alert(`Congratulations! You beat the computer ${playerScore}-${computerScore}!`);
+        }
+        else {
+            //alert(`Sorry! The computer beat you ${computerScore}-${playerScore}. Try Again!`);
+        }
     }
 }
 
-function playRound() {
+function playRound(btnID) {
     let winner = null
-
     while(winner===null) {
-        playerSelection = "Rock"//getPlayerInput();
+        playerSelection = getPlayerInput(btnID);
 
         computerSelection = computerPlay();
 
@@ -33,6 +64,24 @@ function playRound() {
     }
     return winner;
 }
+
+function getPlayerInput(selection) {
+    switch(selection){
+        case "rock":
+            valid = true;
+            return "Rock";
+        case "paper":
+            valid = true;
+            return "Paper";
+        case "scissors":
+            valid = true;
+            return "Scissors";
+    }
+}
+
+
+
+
 
 function computerPlay() {
     let selection = getRandomInt(1, 3);
@@ -52,25 +101,7 @@ function getRandomInt(min, max) {
     return Math.floor(Math.random() * (max - min + 1) + min)
 }
 
-function getPlayerInput() {
-    let valid = false;
-    while(valid === false) {
-        let selection = prompt("Please select Rock, Paper, or Scissors:")
-        switch(selection.toLowerCase()){
-            case "rock":
-                valid = true;
-                return "Rock";
-            case "paper":
-                valid = true;
-                return "Paper";
-            case "scissors":
-                valid = true;
-                return "Scissors";
-            default:
-                alert("Invalid Entry");
-        }
-    }
-}
+
 
 function getWinner(player, computer){
     if(player === computer) {return null}
@@ -101,6 +132,7 @@ function showScoreDiv(player, computer){
     let message = `Current score\nPlayer: ${player} Computer: ${computer}`
     if(!document.querySelector('#score-div')){
     const body = document.querySelector('body');
+    const btnDiv = document.querySelector('#button-div')
 
     const div = document.createElement('div');
     div.id = 'score-div'
@@ -112,7 +144,7 @@ function showScoreDiv(player, computer){
     console.log(para);
 
     div.appendChild(para);
-    body.appendChild(div);
+    body.insertBefore(div, btnDiv);
     }
     else{
         const para = document.querySelector('#score');
@@ -120,21 +152,3 @@ function showScoreDiv(player, computer){
     }
 }
 
-function showGameButtons(){
-    const start = document.querySelector('#start-btn');
-    start.remove();
-
-    const btnDiv = document.querySelector('#button-div');
-
-    const rock = document.createElement('button');
-    rock.textContent = 'Rock';
-    btnDiv.append(rock);
-
-    const paper = document.createElement('button');
-    paper.textContent = 'Paper';
-    btnDiv.append(paper);
-
-    const scissors = document.createElement('button');
-    scissors.textContent = 'Scissors';
-    btnDiv.append(scissors);
-}

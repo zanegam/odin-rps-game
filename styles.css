@@ -1,17 +1,29 @@
-html, body{
+html{
     height: 100%;
     margin: 0;
+}
+
+body {
+    display:flex;
+    flex-direction: column;
+    align-content: center;
+    justify-content: center;
+    height: 100%;
 }
 
 #button-div {
     display:flex;
     align-content: center;
     justify-content: center;
-    height: 100%;
 }
 
 button {
     height: 50px;
     width: 100px;
     margin: auto 10px;
+}
+
+#score-div {
+    height: 50px;
+    margin: auto auto auto 20px;
 }
