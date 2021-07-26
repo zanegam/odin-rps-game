@@ -10,6 +10,10 @@ function showGameButtons(){
     const start = document.querySelector('#start-btn');
     start.style.display = "none";
 
+    if(start.textContent === "Play Again?"){
+        resetGame();
+    }
+
     const gameBtns = document.querySelectorAll('.game-btns')
     gameBtns.forEach((btn) => {
         btn.style.display = "inline-block";
@@ -183,4 +187,11 @@ function endGame() {
 
     const roundDiv = document.querySelector('#round-div');
     roundDiv.remove();
+}
+
+function resetGame(){
+    playerScore = 0;
+    computerScore = 0;
+    const scoreDiv = document.querySelector('#score-div');
+    scoreDiv.remove();
 }
