@@ -24,18 +24,15 @@ gameBtns.forEach((btn) => {
 
 function playGame(e) {
     const btnEvt = e;
+    const playTo = 5;
 
-    if(playerScore < 5 && computerScore < 5){
-        playRound(btnEvt.srcElement.id) === 1? playerScore += 1: computerScore += 1;
+    playRound(btnEvt.srcElement.id) === 1? playerScore += 1: computerScore += 1;
+
+    if(playerScore < playTo && computerScore < playTo){
         showScoreDiv(playerScore, computerScore);
     }
     else {
-        if(playerScore > computerScore) {
-            //alert(`Congratulations! You beat the computer ${playerScore}-${computerScore}!`);
-        }
-        else {
-            //alert(`Sorry! The computer beat you ${computerScore}-${playerScore}. Try Again!`);
-        }
+        endGame();
     }
 }
 
@@ -154,3 +151,36 @@ function showScoreDiv(player, computer){
     }
 }
 
+function endGame() {
+    let message = '';
+    if(playerScore > computerScore) {
+        message = `Congratulations! You beat the computer ${playerScore}-${computerScore}!`;
+    }
+    else {
+        message = `Sorry! The computer beat you ${computerScore}-${playerScore}. Try Again!`;
+    }
+
+    const body = document.querySelector('body');
+    const scoreDiv = document.querySelector('#score-div');
+    const scoreDivChildren = scoreDiv.childNodes;
+    [...scoreDivChildren].forEach(child => {
+        child.remove();
+    })
+
+    const endMessage = document.createElement('h2');
+    endMessage.textContent = message;
+    scoreDiv.appendChild(endMessage);
+    
+
+    const gameBtns = document.querySelectorAll('.game-btns')
+    gameBtns.forEach((btn) => {
+        btn.style.display = "none";
+    })
+
+    const start = document.querySelector('#start-btn');
+    start.textContent = "Play Again?";
+    start.style.display = 'inline-block';
+
+    const roundDiv = document.querySelector('#round-div');
+    roundDiv.remove();
+}
