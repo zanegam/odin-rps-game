@@ -1,3 +1,6 @@
+let playerScore = 0;
+let computerScore = 0;
+
 const startBtn = document.querySelector('#start-btn')
 startBtn.addEventListener('click', () =>{
     showGameButtons();
@@ -5,38 +8,22 @@ startBtn.addEventListener('click', () =>{
 
 function showGameButtons(){
     const start = document.querySelector('#start-btn');
-    start.remove();
+    start.style.display = "none";
 
-    const btnDiv = document.querySelector('#button-div');
-
-    const rock = document.createElement('button');
-    rock.textContent = 'Rock';
-    rock.id = 'rock';
-    rock.classList.add('game-btn');
-    btnDiv.append(rock);
-
-    const paper = document.createElement('button');
-    paper.textContent = 'Paper';
-    paper.id = 'paper';
-    paper.classList.add('game-btn');
-    btnDiv.append(paper);
-
-    const scissors = document.createElement('button');
-    scissors.textContent = 'Scissors';
-    scissors.id = 'scissors';
-    scissors.classList.add('game-btn');
-    btnDiv.append(scissors);
-
-    const gameBtns = document.querySelectorAll('button');
+    const gameBtns = document.querySelectorAll('.game-btns')
     gameBtns.forEach((btn) => {
-    btn.addEventListener('click', playGame);
-    });
+        btn.style.display = "inline-block";
+    })
 }
+
+const gameBtns = document.querySelectorAll('.game-btns');
+gameBtns.forEach((btn) => {
+    let output = btn.addEventListener('click', playGame);
+});
+
 
 function playGame(e) {
     const btnEvt = e;
-    let playerScore = 0;
-    let computerScore = 0;
 
     if(playerScore < 5 && computerScore < 5){
         playRound(btnEvt.srcElement.id) === 1? playerScore += 1: computerScore += 1;
@@ -60,7 +47,7 @@ function playRound(btnID) {
         computerSelection = computerPlay();
 
         winner = getWinner(playerSelection, computerSelection);
-        //displayRoundOutput(winner, playerSelection, computerSelection);
+        displayRoundOutput(winner, playerSelection, computerSelection);
     }
     return winner;
 }
@@ -78,10 +65,6 @@ function getPlayerInput(selection) {
             return "Scissors";
     }
 }
-
-
-
-
 
 function computerPlay() {
     let selection = getRandomInt(1, 3);
@@ -101,8 +84,6 @@ function getRandomInt(min, max) {
     return Math.floor(Math.random() * (max - min + 1) + min)
 }
 
-
-
 function getWinner(player, computer){
     if(player === computer) {return null}
     switch(player){
@@ -116,35 +97,56 @@ function getWinner(player, computer){
 }
 
 function displayRoundOutput(winner, player, computer){
+    let message = '';
     switch(winner){
         case 1:
-            alert(`Congratulations, you win! ${player} beats ${computer}.`);
+            message = `Congratulations, you win! ${player} beats ${computer}.`;
             break;
         case 0:
-            alert(`Sorry, you lose. ${computer} beats ${player}.`);
+            message = `Sorry, you lose. ${computer} beats ${player}.`;
             break;
         default:
-            alert(`Tie game! You both chose ${player}. Try again!`)
+            message = `Tie game! You both chose ${player}. Try again!`;
+    }
+    if(!document.querySelector('#round-div')){
+        const body = document.querySelector('body');
+
+        const div = document.createElement('div');
+        div.id = 'round-div';
+
+        const roundTxt = document.createElement('p')
+        roundTxt.id = 'round-txt';
+        roundTxt.textContent = message;
+
+        div.appendChild(roundTxt);
+        body.appendChild(div);
+    }
+    else{
+        const roundTxt = document.querySelector('#round-txt');
+        roundTxt.textContent = message;
     }
 }
 
 function showScoreDiv(player, computer){
-    let message = `Current score\nPlayer: ${player} Computer: ${computer}`
+    let message = `Player: ${player} Computer: ${computer}`
     if(!document.querySelector('#score-div')){
-    const body = document.querySelector('body');
-    const btnDiv = document.querySelector('#button-div')
+        const body = document.querySelector('body');
+        const btnDiv = document.querySelector('#button-div')
 
-    const div = document.createElement('div');
-    div.id = 'score-div'
+        const div = document.createElement('div');
+        div.id = 'score-div'
 
-    const para = document.createElement('p');
-    para.id = 'score';
-    para.whiteSpace = 'pre-line';
-    para.textContent = message;
-    console.log(para);
+        const title = document.createElement('h3');
+        title.id = 'score-title';
+        title.textContent = "Current score";
+        
+        const para = document.createElement('p');
+        para.id = 'score';
+        para.textContent = message;
 
-    div.appendChild(para);
-    body.insertBefore(div, btnDiv);
+        div.appendChild(title);
+        div.appendChild(para);
+        body.insertBefore(div, btnDiv);
     }
     else{
         const para = document.querySelector('#score');

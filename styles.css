@@ -5,7 +5,8 @@ html{
 
 body {
     display:flex;
-    flex-direction: column;
+    flex: 1;
+    flex-flow: column;
     align-content: center;
     justify-content: center;
     height: 100%;
@@ -24,6 +25,14 @@ button {
 }
 
 #score-div {
-    height: 50px;
-    margin: auto auto auto 20px;
+    flex-direction: column;
+    text-align: center;
+}
+
+.game-btns{
+    display: none;
+}
+
+#round-div{
+    text-align: center;
 }
