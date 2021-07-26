@@ -1,16 +1,38 @@
-html, body{
+html{
     height: 100%;
     margin: 0;
+}
+
+body {
+    display:flex;
+    flex: 1;
+    flex-flow: column;
+    align-content: center;
+    justify-content: center;
+    height: 100%;
 }
 
 #button-div {
     display:flex;
     align-content: center;
     justify-content: center;
-    height: 100%;
 }
 
-#start-btn {
+button {
     height: 50px;
-    margin: auto;
+    width: 100px;
+    margin: auto 10px;
+}
+
+#score-div {
+    flex-direction: column;
+    text-align: center;
+}
+
+.game-btns{
+    display: none;
+}
+
+#round-div{
+    text-align: center;
 }
