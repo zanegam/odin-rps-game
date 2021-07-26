@@ -1,5 +1,27 @@
-let playerScore = 0;
-let computerScore = 0;
+class Score {
+    constructor () {
+        this.player = 0;
+        this.computer = 0;
+    }
+
+    get playerScore() {
+        return this.player;
+    }
+
+    get computerScore() {
+        return this.computer;
+    }
+
+    addPlayerScore() {
+        this.player += 1;
+    }
+
+    addComputerScore() {
+        this.computer += 1;
+    }
+}
+
+let score = new Score();
 
 const startBtn = document.querySelector('#start-btn')
 startBtn.addEventListener('click', () =>{
@@ -30,10 +52,10 @@ function playGame(e) {
     const btnEvt = e;
     const playTo = 5;
 
-    playRound(btnEvt.srcElement.id) === 1? playerScore += 1: computerScore += 1;
+    playRound(btnEvt.srcElement.id) === 1? score.addPlayerScore(): score.addComputerScore();
 
-    if(playerScore < playTo && computerScore < playTo){
-        showScoreDiv(playerScore, computerScore);
+    if(score.playerScore < playTo && score.computerScore < playTo){
+        showScoreDiv(score.playerScore, score.computerScore);
     }
     else {
         endGame();
@@ -157,11 +179,11 @@ function showScoreDiv(player, computer){
 
 function endGame() {
     let message = '';
-    if(playerScore > computerScore) {
-        message = `Congratulations! You beat the computer ${playerScore}-${computerScore}!`;
+    if(score.playerScore > score.computerScore) {
+        message = `Congratulations! You beat the computer ${score.playerScore}-${score.computerScore}!`;
     }
     else {
-        message = `Sorry! The computer beat you ${computerScore}-${playerScore}. Try Again!`;
+        message = `Sorry! The computer beat you ${score.computerScore}-${score.playerScore}. Try Again!`;
     }
 
     const body = document.querySelector('body');
@@ -190,8 +212,7 @@ function endGame() {
 }
 
 function resetGame(){
-    playerScore = 0;
-    computerScore = 0;
+    score = new Score();
     const scoreDiv = document.querySelector('#score-div');
     scoreDiv.remove();
 }
