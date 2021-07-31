@@ -148,50 +148,55 @@ function displayRoundOutput(winner, player, computer){
         default:
             message = `Tie game! You both chose ${player}. Try again!`;
     }
-    if(!document.querySelector('#round-div')){
-        const body = document.querySelector('body');
+    // if(!document.querySelector('#round-div')){
+    //     const body = document.querySelector('body');
 
-        const div = document.createElement('div');
-        div.id = 'round-div';
+    //     const div = document.createElement('div');
+    //     div.id = 'round-div';
 
-        const roundTxt = document.createElement('p')
-        roundTxt.id = 'round-txt';
-        roundTxt.textContent = message;
+    //     const roundTxt = document.createElement('p')
+    //     roundTxt.id = 'round-txt';
+    //     roundTxt.textContent = message;
 
-        div.appendChild(roundTxt);
-        body.appendChild(div);
-    }
-    else{
-        const roundTxt = document.querySelector('#round-txt');
-        roundTxt.textContent = message;
-    }
+    //     div.appendChild(roundTxt);
+    //     body.appendChild(div);
+    // }
+    // else{
+    //    const roundTxt = document.querySelector('#round-txt');
+    //    roundTxt.textContent = message;
+    //}
+    const roundTxt = document.querySelector('#round-msg');
+    roundTxt.textContent = message;
+
 }
 
 function showScoreDiv(player, computer){
     let message = `Player: ${player} Computer: ${computer}`
-    if(!document.querySelector('#score-div')){
-        const body = document.querySelector('body');
-        const btnDiv = document.querySelector('#button-div')
+    // if(!document.querySelector('#score-div')){
+    //     const body = document.querySelector('body');
+    //     const btnDiv = document.querySelector('#button-div')
 
-        const div = document.createElement('div');
-        div.id = 'score-div'
+    //     const div = document.createElement('div');
+    //     div.id = 'score-div'
 
-        const title = document.createElement('h3');
-        title.id = 'score-title';
-        title.textContent = "Current score";
+    //     const title = document.createElement('h3');
+    //     title.id = 'score-title';
+    //     title.textContent = "Current score";
         
-        const para = document.createElement('p');
-        para.id = 'score';
-        para.textContent = message;
+    //     const para = document.createElement('p');
+    //     para.id = 'score';
+    //     para.textContent = message;
 
-        div.appendChild(title);
-        div.appendChild(para);
-        body.insertBefore(div, btnDiv);
-    }
-    else{
+    //     div.appendChild(title);
+    //     div.appendChild(para);
+    //     body.insertBefore(div, btnDiv);
+    // }
+    //else{
+        const title = document.querySelector('#score-title');
+        title.textContent = "Current Score";
         const para = document.querySelector('#score');
         para.textContent = message;
-    }
+    //}
 }
 
 function endGame() {
