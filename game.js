@@ -31,10 +31,14 @@ startBtn.addEventListener('click', () =>{
 function showGameButtons(){
     const start = document.querySelector('#start-btn');
     start.style.display = "none";
-
     if(start.textContent === "Play Again?"){
         resetGame();
     }
+
+    const initBtns = document.querySelectorAll('.init-btns')
+    initBtns.forEach((btn) => {
+        btn.style.display = "none";
+    })
 
     const gameBtns = document.querySelectorAll('.game-btns')
     gameBtns.forEach((btn) => {
