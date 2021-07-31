@@ -32,9 +32,22 @@ h1 {
 }
 
 button {
-    height: 50px;
-    width: 100px;
+    height: 70px;
+    width: 150px;
     margin: auto 10px;
+    font-family: Creepster, cursive;
+    font-size: 25px;
+    color: #c62828;
+    background-color: #1b1b1b;
+    border-style: solid;
+    border-color: #6d6d6d;
+    border-radius: 50%;
+}
+
+button:hover {
+    background-color: #6d6d6d;
+    color: #1b1b1b;
+    border-color: #1b1b1b;
 }
 
 #score-div {
