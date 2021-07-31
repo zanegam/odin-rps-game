@@ -21,11 +21,13 @@ class Score {
     }
 }
 
+const playTo = 5;
 let score = new Score();
 
 const startBtn = document.querySelector('#start-btn')
 startBtn.addEventListener('click', () =>{
     showGameButtons();
+    showGameHeader();
 })
 
 function showGameButtons(){
@@ -46,6 +48,18 @@ function showGameButtons(){
     })
 }
 
+function showGameHeader() {
+    header = document.querySelector('#header-div')
+    headerH1 = document.querySelector('#header-h1');
+    
+    headerH1.textContent = "Rock, Paper, or Scissors"
+    
+    headerH2 = document.createElement('h2');
+    headerH2.textContent = 'Choose wisely...';
+
+    header.appendChild(headerH2);
+}
+
 const gameBtns = document.querySelectorAll('.game-btns');
 gameBtns.forEach((btn) => {
     let output = btn.addEventListener('click', playGame);
@@ -54,7 +68,6 @@ gameBtns.forEach((btn) => {
 
 function playGame(e) {
     const btnEvt = e;
-    const playTo = 5;
 
     playRound(btnEvt.srcElement.id) === 1? score.addPlayerScore(): score.addComputerScore();
 
