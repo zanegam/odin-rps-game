@@ -21,13 +21,12 @@ class Score {
     }
 }
 
-const playTo = 5;
+const playTo = 2;
 let score = new Score();
 
 const startBtn = document.querySelector('#start-btn')
 startBtn.addEventListener('click', () =>{
     showGameButtons();
-    showGameHeader();
 })
 
 function showGameButtons(){
@@ -36,7 +35,9 @@ function showGameButtons(){
     if(start.textContent === "Play Again?"){
         resetGame();
     }
-
+    else {
+        showGameHeader();
+    }
     const initBtns = document.querySelectorAll('.init-btns')
     initBtns.forEach((btn) => {
         btn.style.display = "none";
@@ -148,23 +149,6 @@ function displayRoundOutput(winner, player, computer){
         default:
             message = `Tie game! You both chose ${player}. Try again!`;
     }
-    // if(!document.querySelector('#round-div')){
-    //     const body = document.querySelector('body');
-
-    //     const div = document.createElement('div');
-    //     div.id = 'round-div';
-
-    //     const roundTxt = document.createElement('p')
-    //     roundTxt.id = 'round-txt';
-    //     roundTxt.textContent = message;
-
-    //     div.appendChild(roundTxt);
-    //     body.appendChild(div);
-    // }
-    // else{
-    //    const roundTxt = document.querySelector('#round-txt');
-    //    roundTxt.textContent = message;
-    //}
     const roundTxt = document.querySelector('#round-msg');
     roundTxt.textContent = message;
 
@@ -212,12 +196,15 @@ function endGame() {
     const scoreDiv = document.querySelector('#score-div');
     const scoreDivChildren = scoreDiv.childNodes;
     [...scoreDivChildren].forEach(child => {
-        child.remove();
+        child.textContent = '';
     })
 
+    const gameDiv = document.querySelector('#game-div');
+    const divChild = gameDiv.firstChild;
     const endMessage = document.createElement('h2');
     endMessage.textContent = message;
-    scoreDiv.appendChild(endMessage);
+    endMessage.id = 'end-message';
+    gameDiv.insertBefore(endMessage, divChild);
     
 
     const gameBtns = document.querySelectorAll('.game-btns')
@@ -228,13 +215,12 @@ function endGame() {
     const start = document.querySelector('#start-btn');
     start.textContent = "Play Again?";
     start.style.display = 'inline-block';
-
-    const roundDiv = document.querySelector('#round-div');
-    roundDiv.remove();
 }
 
 function resetGame(){
     score = new Score();
-    const scoreDiv = document.querySelector('#score-div');
-    scoreDiv.remove();
+    // const scoreDiv = document.querySelector('#score-div');
+    // scoreDiv.remove();
+    const endMessage = document.querySelector('#end-message');
+    endMessage.remove();
 }
