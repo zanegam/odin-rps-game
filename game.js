@@ -21,7 +21,7 @@ class Score {
     }
 }
 
-const playTo = 2;
+const playTo = 5;
 let score = new Score();
 
 const startBtn = document.querySelector('#start-btn')
